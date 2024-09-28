@@ -3,6 +3,9 @@ package com.myTest;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.Collections;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
@@ -88,5 +91,29 @@ public class DevowelizerServiceTest {
                 .then().assertThat().statusCode(200)
                 .body(is("приветHll"));
     }
+
+    // LARGE INPUTS
+    // Test with long string input of 1000 chars
+    @Test
+    public void shouldHandleLongStringsXL() {
+        String longString = String.join("", Collections.nCopies(1000, "Hello"));
+        String longResult = String.join("", Collections.nCopies(1000, "Hll"));
+        given()
+                .when().get("/" + longString)
+                .then().assertThat().statusCode(200)
+                .body(is(longResult));
+    }
+
+    // Test with long string input of 5000 chars
+    @Test
+    public void shouldHandleLongStringsXXL() {
+        String longString = String.join("", Collections.nCopies(5000, "Hello"));
+        String longResult = String.join("", Collections.nCopies(5000, "Hll"));
+        given()
+                .when().get("/" + longString)
+                .then().assertThat().statusCode(200)
+                .body(is(longResult));
+    }
+
 
 }
