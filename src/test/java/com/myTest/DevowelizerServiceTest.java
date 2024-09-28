@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 
 
 public class DevowelizerServiceTest {
@@ -115,5 +116,16 @@ public class DevowelizerServiceTest {
                 .body(is(longResult));
     }
 
+    // TIME
+    // Test for response time 1000 ms
+    @Test
+    public void shouldResponseIn1000ms(){
+        given().when().get("/Hello").then().assertThat().time(lessThan(1000L));
+    }
+    // Test for response time 3000 ms
+    @Test
+    public void shouldResponseIn3000ms(){
+        given().when().get("/Hello").then().assertThat().time(lessThan(3000L));
+    }
 
 }
