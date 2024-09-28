@@ -3,9 +3,7 @@ package com.myTest;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.Collections;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
@@ -16,7 +14,6 @@ public class DevowelizerServiceTest {
     @BeforeClass
     public static void setup() {
         RestAssured.baseURI = "http://localhost:8080";
-
     }
 
     // GENERAL TESTS
@@ -120,7 +117,7 @@ public class DevowelizerServiceTest {
     // Test for response time 1000 ms
     @Test
     public void shouldResponseIn1000ms(){
-        given().when().get("/Hello").then().assertThat().time(lessThan(1000L));
+        given().when().get("/Hello").then().assertThat().time(lessThan(500L));
     }
     // Test for response time 3000 ms
     @Test
